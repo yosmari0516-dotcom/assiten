@@ -1,0 +1,62 @@
+backend/
+├── api/
+│   └── v1/
+│       ├── authorize.php              # Endpoint básico
+│       └── authorize_secure.php       # Endpoint con seguridad ⭐
+├── config/
+│   ├── .env                           # PRIVADO: Tu configuración
+│   ├── .env.example                   # Template
+│   └── database.php                   # Config BD
+├── database/
+│   └── migrations/
+│       ├── 001_create_conductores_table.sql
+│       └── 002_add_security_fields.sql
+├── docs/
+│   └── SECURITY_IMPROVEMENTS.md       # Documentación
+├── .htaccess                          # Seguridad Apache
+├── README.md                          # Documentación
+├── README_DEPLOYMENT.md               # Guía instalación
+├── test_authorize.php                 # Prueba de endpoint ⭐
+└── deploy_assiten.sh                  # Script auto-instalación
+
+android/
+├── app/
+│   ├── build.gradle.kts               # Dependencias
+│   ├── src/main/kotlin/
+│   │   ├── data/
+│   │   │   ├── remote/
+│   │   │   │   ├── ApiClient.kt
+│   │   │   │   └── AuthorizationApiService.kt
+│   │   │   └── repository/
+│   │   │       └── AuthorizationRepositoryImpl.kt
+│   │   ├── domain/
+│   │   │   └── repository/
+│   │   │       └── AuthorizationRepository.kt
+│   │   ├── presentation/
+│   │   │   ├── service/
+│   │   │   │   ├── AutomationAccessibilityService.kt
+│   │   │   │   └── MyAccessibilityService.kt       # ⭐ VERSIÓN MEJORADA
+│   │   │   ├── helper/
+│   │   │   │   └── AccessibilityServiceHelper.kt
+│   │   │   └── activity/
+│   │   │       └── MainActivity.kt
+│   │   ├── security/
+│   │   │   └── DeviceSecurityManager.kt            # ⭐ SEGURIDAD
+│   │   └── di/
+│   │       └── RepositoryModule.kt
+│   ├── src/test/kotlin/
+│   │   ├── data/repository/
+│   │   │   └── AuthorizationRepositoryTest.kt
+│   │   └── presentation/service/
+│   │       └── MyAccessibilityServiceSecurityTest.kt
+│   └── src/main/AndroidManifest.xml
+└── settings.gradle.kts
+
+docs/
+└── SECURITY_IMPROVEMENTS.md           # Documentación completa
+
+README.md                             # Guía general
+.gitignore
+.github/
+└── workflows/
+    └── (CI/CD config)
