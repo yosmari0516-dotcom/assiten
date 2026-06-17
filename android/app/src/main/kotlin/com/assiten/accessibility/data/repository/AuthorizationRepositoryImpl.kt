@@ -7,30 +7,29 @@ import com.assiten.accessibility.domain.repository.AuthorizationRepository
 import timber.log.Timber
 
 /**
- * AuthorizationRepositoryImpl: Implementación concreta del repositorio
- * Maneja:
- * - Llamadas HTTP al backend
- * - Manejo de errores y timeouts
- * - Logging de fallos
+ * AuthorizationRepositoryImpl: Actualizado con seguridad mejorada
  */
 class AuthorizationRepositoryImpl(
-    private val apiClient: ApiClient
+    private val apiClient: ApiClient = ApiClient
 ) : AuthorizationRepository {
 
     override suspend fun checkAction(
         telefono_id: String,
+        authToken: String,
         accion: String,
         elemento_id: String?
     ): Result<AuthorizationResponse> = try {
         val request = AuthorizationRequest(
-            telefono_id = telefono_id,
+            telefono_id = telefono_id,  // Ya contiene firma
             accion = accion,
             elemento_id = elemento_id
         )
 
+        // ✨ Incluye authToken en el header
         val response = apiClient.retrofitService.checkAuthorization(
             request = request,
-            apiKey = BuildConfig.API_KEY
+            apiKey = BuildConfig.API_KEY,
+            authToken = authToken
         )
 
         if (response.isSuccessful) {
